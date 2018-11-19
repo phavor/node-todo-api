@@ -31,5 +31,10 @@
     "express": "^4.16.4",
     "moment": "^2.22.2",
     "mongoose": "^5.3.12"
+  },
+  "devDependencies": {
+    "expect": "^23.6.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
   }
 }

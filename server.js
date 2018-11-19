@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 
 const app = express()
 const todoRoutes = require('./routes/todo')
+const userRoutes = require('./routes/user')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -19,5 +20,6 @@ mongoose.connect('mongodb://localhost:27017/TodoApp', {
   .catch(err => console.log('Opppsss... could not connect to database', err))
 
 app.use('/todos', todoRoutes)
+app.use('/', userRoutes)
 
 app.listen(3000, () => console.log('server running on port 3000'))
