@@ -26,6 +26,24 @@ module.exports = {
       })
   },
 
+  // login user
+  user_login (req, res) {
+    const body = _.pick(req.body, ['username', 'password'])
+
+    User.findByCredentials(body.username, body.password)
+      .then(user => {
+        return user.generateAuthToken()
+          .then(token => {
+            res.status(200)
+              .header('x-auth', token)
+              .send(user)
+          })
+      })
+      .catch(err => {
+        res.status(400).send()
+      })
+  },
+
   // get a single person
   user_me (req, res) {
     res.send(req.user)
