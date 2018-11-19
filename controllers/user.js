@@ -24,5 +24,10 @@ module.exports = {
           error: err.message
         })
       })
+  },
+
+  // get a single person
+  user_me (req, res) {
+    res.send(req.user)
   }
 }
