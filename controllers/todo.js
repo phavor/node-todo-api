@@ -3,6 +3,22 @@ const Todo = require('../model/todo-schema')
 
 module.exports = {
   new_todo (req, res) {
-    res.send('A post request to create a new Todo')
+    let todo = new Todo({
+      text: req.body.text,
+      completed: req.body.completed,
+      completedAt: req.body.completedAt
+    })
+
+    todo.save()
+      .then(doc => {
+        res.send(doc)
+      })
+      .catch(err => {
+        res.status(500)
+        .json({
+          message: 'Could not save todo',
+          error: err.message
+        })
+      })
   }
 }
