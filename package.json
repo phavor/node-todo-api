@@ -4,8 +4,12 @@
   "description": "A node todo api hosted on heroku",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "mocha tests/*.test.js",
     "test-watch": "nodemon --exec 'npm test'"
+  },
+  "engines": {
+    "node": "10.13.0"
   },
   "repository": {
     "type": "git",
