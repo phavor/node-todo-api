@@ -8,12 +8,13 @@ const app = express()
 const todoRoutes = require('./routes/todo')
 const userRoutes = require('./routes/user')
 const port = process.env.PORT || 3000
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp' 
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // connect to database
-mongoose.connect('mongodb://localhost:27017/TodoApp', {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true
 })
