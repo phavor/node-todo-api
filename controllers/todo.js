@@ -11,8 +11,8 @@ module.exports = {
     })
 
     todo.save()
-      .then(doc => {
-        res.status(201).send(doc)
+      .then(todo => {
+        res.status(201).send(todo)
       })
       .catch(err => {
         res.status(500)
@@ -27,8 +27,8 @@ module.exports = {
   get_all_todos (req, res) {
     Todo.find()
       .select('-__v')
-      .then(doc => {
-        res.status(200).send(doc)
+      .then(todo => {
+        res.status(200).send(todo)
       })
       .catch(err => {
         res.status(400).send(err.message)
@@ -41,8 +41,8 @@ module.exports = {
 
     Todo.findById(_id)
       .select(' -__v')
-      .then(doc => {
-        res.status(200).send(doc)
+      .then(todo => {
+        res.status(200).send(todo)
       })
       .catch(err => {
         res.status(400).send(err.message)
@@ -59,8 +59,21 @@ module.exports = {
         completed: req.body.completed
       }
     }, { new: true })
-      .then(doc => {
-        res.status(200).send(doc)
+      .then(todo => {
+        res.status(200).send(todo)
+      })
+      .catch(err => {
+        res.status(400).send(err.message)
+      })
+  },
+
+  // delete a todo
+  delete_todo (req, res) {
+    const id = req.params.id
+
+    Todo.findByIdAndDelete(id)
+      .then(todo => {
+        res.status(200).send(todo)
       })
       .catch(err => {
         res.status(400).send(err.message)
