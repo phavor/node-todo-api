@@ -11,7 +11,7 @@ module.exports = {
 
     todo.save()
       .then(doc => {
-        res.send(doc)
+        res.status(201).send(doc)
       })
       .catch(err => {
         res.status(500)
@@ -19,6 +19,17 @@ module.exports = {
           message: 'Could not save todo',
           error: err.message
         })
+      })
+  },
+
+  get_todo (req, res) {
+    Todo.find()
+      .select('-__v')
+      .then(doc => {
+        res.status(200).send(doc)
+      })
+      .catch(err => {
+        res.status(400).send(err.message)
       })
   }
 }
