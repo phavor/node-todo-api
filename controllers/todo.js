@@ -74,10 +74,16 @@ module.exports = {
 
     Todo.findByIdAndDelete(id)
       .then(todo => {
-        res.status(200).send(todo)
+        res.status(200).send({
+          message: "todo successfully deleted",
+          id
+        })
       })
       .catch(err => {
-        res.status(400).send(err.message)
+        res.status(500).send({
+          message: 'could not find todo',
+          id
+        })
       })
   }
 }
