@@ -1,3 +1,5 @@
+require('./config/config')
+
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
@@ -7,7 +9,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const todoRoutes = require('./routes/todo')
 const userRoutes = require('./routes/user')
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp' 
 
 app.use(bodyParser.json())
