@@ -9,7 +9,7 @@ module.exports = {
     let user = new User(body)
 
     user.save()
-      .then(userDoc => {
+      .then(user => {
         return user.generateAuthToken()
       })
       .then(token => {
@@ -47,5 +47,15 @@ module.exports = {
   // get a single person
   user_me (req, res) {
     res.send(req.user)
+  },
+
+  // logout a user
+  logout (req, res) {
+    req.user.removeToken(req.token)
+      .then(() => {
+        res.status(200).send('logged out')
+      }, () => {
+        res.status(400).send()
+      })
   }
 }
