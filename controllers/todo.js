@@ -7,7 +7,8 @@ module.exports = {
     let todo = new Todo({
       text: req.body.text,
       completed: req.body.completed,
-      completedAt: req.body.completedAt
+      completedAt: req.body.completedAt,
+      _creator: req.user._id
     })
 
     todo.save()
@@ -25,7 +26,7 @@ module.exports = {
 
   // get all todos
   get_all_todos (req, res) {
-    Todo.find()
+    Todo.find({ _creator: req.user._id })
       .select('-__v')
       .then(todo => {
         res.status(200).send(todo)
